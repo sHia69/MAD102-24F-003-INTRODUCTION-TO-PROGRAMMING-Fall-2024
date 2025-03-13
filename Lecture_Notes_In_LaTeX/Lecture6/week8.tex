@@ -1,0 +1,176 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Lists and Dictionaries - MAD 102 Week 8 Notes}
+\author{Hia Al Saleh}
+\date{October 23rd, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Nested Lists}
+Lists can contain other lists, known as nested lists. For example:
+
+\begin{lstlisting}[language=python]
+crews = [['Mal', 'Washburne', 'Zoe'], ['Han', 'Chewie'], ['Kirk', 'Spock', 'McCoy']]
+print(crews[1][1])  # Outputs 'Chewie'
+\end{lstlisting}
+Can use a for loop, with nested for loop, to iterate over the entire contents
+\begin{lstlisting}[language=python]
+crews = [['Mal', 'Washburne', 'Zoe'], ['Han', 'Chewie'], ['Kirk', 'Spock', 'McCoy']]
+for position, crew in enumerate(crews):
+        print('=' * 20)
+        print(f'Crew #{position + 1}')
+        print('=' * 20)
+        for member in crew:
+              print(member)
+\end{lstlisting}
+
+\section{List Slicing}
+Slicing can be used to extract parts of a list. Syntax:
+\[
+\text{list}[ \text{startIndex} : \text{endIndex} ]
+\]
+Example:
+\begin{lstlisting}[language=python]
+numbers = [1, 2, 3, 4, 5]
+sliced = numbers[:3]  # [1, 2, 3]
+\end{lstlisting}
+
+\section{List Comprehensions}
+List comprehensions allow for modifying elements in a list:
+\begin{lstlisting}[language=python]
+numbers = [1, 2, 3, 4, 5]
+new_list = [x * 2 for x in numbers]  # [2, 4, 6, 8, 10]
+\end{lstlisting}
+
+\section{Dictionaries}
+Dictionaries store key-value pairs:
+\begin{lstlisting}[language=python]
+fruit_prices = {'apple': 2, 'banana': 1, 'orange': 3}
+print(fruit_prices['apple'])  # Outputs 2
+\end{lstlisting}
+
+\section{Procedural Programming}
+Up to this point, we've focused on procedural programming, executing steps in sequence with conditional statements and loops.
+
+\section{Object Oriented Programming}
+Object-Oriented Programming (OOP) is a paradigm that focuses on \textbf{objects}, containing both attributes and behaviors. Examples of objects include a \textit{person}, a \textit{car}, and a \textit{bank account}.
+
+\subsection{Attributes and Behaviors}
+Attributes represent the data stored in an object, while behaviors are actions that an object can perform. For example, a dog can \textit{bark}, \textit{run}, and \textit{eat}.
+
+\subsection{Classes and Objects}
+A \textbf{class} is a blueprint for creating objects, containing attributes and methods. Here's an example:
+\begin{lstlisting}[language=python]
+class Dog:
+    def __init__(self, name):
+        self.name = name
+    def bark(self):
+        print(f"{self.name} says Woof!")
+\end{lstlisting}
+\newpage 
+\section{Class Exercises }
+\subsection{Favorite Animals}
+\textbf{Task:}
+\begin{itemize}
+    \item Ask the user for a name and their favorite animal.
+    \item Keep asking until they quit.
+    \item Display the list of names entered.
+    \item Display the list of animals entered.
+    \item Display names and their favorite animal.
+\end{itemize}
+
+\subsubsection{Python Code}
+The following Python code implements the \textit{Favorite Animals} task.
+
+\begin{lstlisting}[language=python]
+def favorite_animals():
+    names = []
+    animals = []
+
+    while True:
+        name = input("Enter your name (or 'quit' to stop): ")
+        if name.lower() == 'quit':
+            break
+        animal = input(f"What's {name}'s favorite animal?: ")
+        names.append(name)
+        animals.append(animal)
+
+    print("\nList of Names:", names)
+    print("List of Favorite Animals:", animals)
+    print("\nNames and their favorite animals:")
+    for i in range(len(names)):
+        print(f"{names[i]}'s favorite animal is {animals[i]}")
+favorite_animals()        
+\end{lstlisting}
+\newpage
+\subsection{Mean - Median - Mode}
+\textbf{Task:}
+\begin{itemize}
+    \item Ask the user to enter a series of numbers.
+    \item Calculate the mean, median, and mode of the numbers.
+    \item Use separate functions for each calculation.
+\end{itemize}
+
+\subsubsection{Python Code}
+The following Python code implements the \textit{Mean, Median, and Mode} task.
+
+\begin{lstlisting}[language=python]
+import statistics
+
+def calculate_mean_median_mode():
+    numbers = list(map(float, input("Enter numbers separated by space: ").split()))
+
+    mean = statistics.mean(numbers)
+    median = statistics.median(numbers)
+    try:
+        mode = statistics.mode(numbers)
+    except statistics.StatisticsError:
+        mode = "No mode"
+
+    print(f"Mean: {mean}")
+    print(f"Median: {median}")
+    print(f"Mode: {mode}")
+calculate_mean_median_mode()    
+\end{lstlisting}
+
+\end{document}

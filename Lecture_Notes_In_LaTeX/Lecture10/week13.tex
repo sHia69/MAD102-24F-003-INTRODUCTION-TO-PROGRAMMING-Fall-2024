@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Recursion and Searching Algorithms - MAD 102 Week 13 Notes}
+\author{Hia Al Saleh}
+\date{November 27th, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Recursion}
+\subsection{Definition}
+Recursion occurs when a function calls itself. It is a powerful technique used in algorithms, but improper usage can result in infinite loops or stack overflows. To prevent this, a base case is always required.
+
+\subsection{Structure of a Recursive Function}
+A recursive function typically contains:
+\begin{enumerate}
+    \item \textbf{Base Case:} This is the condition that stops the recursion.
+    \item \textbf{Recursive Case:} The part where the function calls itself.
+\end{enumerate}
+
+\subsection{Example: Sum of Natural Numbers}
+The following function calculates the sum of natural numbers up to \(n\):
+\begin{lstlisting}[language=Python]
+def sum_up_to(n):
+    if n == 1:  # Base case
+        return 1
+    else:  # Recursive case
+        return n + sum_up_to(n - 1)
+\end{lstlisting}
+
+\subsection{Explanation of Execution}
+Starting with \(n = 5\), the function calls itself multiple times until it reaches the base case:
+\[
+\begin{aligned}
+    \text{sum\_up\_to(5)} & = 5 + \text{sum\_up\_to(4)} \\
+    \text{sum\_up\_to(4)} & = 4 + \text{sum\_up\_to(3)} \\
+    & \dots \\
+    \text{sum\_up\_to(1)} & = 1
+\end{aligned}
+\]
+
+\section{Program Execution and the Stack}
+\subsection{Stack Overview}
+In recursive functions, each function call is stored on the stack until it reaches the base case. This is known as "pushing onto the stack." Once the base case is reached, the results are returned, "popping off the stack."
+
+\subsection{Stack Overflow}
+A stack overflow occurs if too many recursive calls are made without reaching the base case. For example, the following faulty function causes infinite recursion:
+\begin{lstlisting}[language=Python]
+def infinite_recursion():
+    return infinite_recursion()  # No base case
+\end{lstlisting}
+
+\section{Searching Algorithms}
+\subsection{Linear Search}
+Linear search examines each element in the list sequentially. 
+\begin{lstlisting}[language=Python]
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return the index
+    return -1  # Not found
+\end{lstlisting}
+\textbf{Example:}
+\begin{itemize}
+    \item Input: \texttt{arr = [3, 5, 2, 8, 6], target = 8}
+    \item Output: \texttt{3} (index of 8)
+\end{itemize}
+
+\subsection{Binary Search}
+Binary search is efficient for sorted lists. It divides the list into halves:
+\begin{lstlisting}[language=Python]
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1  # Not found
+\end{lstlisting}
+
+\section{Sorting Algorithms}
+\subsection{Selection Sort}
+Selection sort repeatedly selects the smallest element from the unsorted part.
+\begin{lstlisting}[language=Python]
+def selection_sort(arr):
+    for i in range(len(arr)):
+        min_index = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+\end{lstlisting}
+
+\subsection{Insertion Sort}
+Insertion sort inserts each element into its correct position in the sorted part:
+\begin{lstlisting}[language=Python]
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+\end{lstlisting}
+
+\section{Algorithm Efficiency}
+\subsection{Big O Notation}
+\begin{itemize}
+    \item \textbf{Constant Time:} \(O(1)\) - Example: Accessing an array element.
+    \item \textbf{Linear Time:} \(O(N)\) - Example: Linear search.
+    \item \textbf{Logarithmic Time:} \(O(\log N)\) - Example: Binary search.
+    \item \textbf{Quadratic Time:} \(O(N^2)\) - Example: Selection sort.
+\end{itemize}
+\end{document}

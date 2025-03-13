@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Python Questions and Answers}
+
+\subsection*{Question 1}
+What will be the output of the following Python code?
+\begin{verbatim}
+a = [1, 2, 3, 4]
+b = [sum(a[0:x+1]) for x in range(0, len(a))]
+print(b)
+\end{verbatim}
+
+\textbf{Answer:} \([1, 3, 6, 10]\)
+
+\subsection*{Question 2}
+This method removes and returns the last item in a list.
+\begin{itemize}
+    \item list.last()
+    \item list.removeLast()
+    \item list.pop()
+    \item list.popLast()
+\end{itemize}
+
+\textbf{Answer:} \texttt{list.pop()}
+
+\subsection*{Question 3}
+This method sorts a list and returns a new list instead of modifying it in place.
+\begin{itemize}
+    \item sortedBy()
+    \item sorted()
+    \item newSort()
+    \item sort()
+\end{itemize}
+
+\textbf{Answer:} \texttt{sorted()}
+
+\subsection*{Question 4}
+\begin{verbatim}
+names = ['Tony', 'Bruce', 'Natasha', 'Steve']
+print(names[3:])
+\end{verbatim}
+
+\begin{itemize}
+    \item Steve
+    \item Error - missing a value.
+    \item Natasha, Steve
+    \item Tony, Bruce, Natasha
+\end{itemize}
+
+\textbf{Answer:} \texttt{['Steve']}
+
+\subsection*{Question 5}
+The count method for a list returns the number of unique items in the list - it does not count duplicates.
+\begin{itemize}
+    \item True
+    \item False
+\end{itemize}
+
+\textbf{Answer:} False
+
+\subsection*{Question 6}
+Which one of these best describes a list:
+\begin{itemize}
+    \item An immutable container that contains a sequence of items ordered from right-to-left
+    \item A mutable container that contains a sequence of items ordered from left-to-right
+    \item An immutable container that contains items with no defined order
+    \item A mutable container that contains items with no defined order
+\end{itemize}
+
+\textbf{Answer:} A mutable container that contains a sequence of items ordered from left-to-right
+
+\subsection*{Question 7}
+\texttt{all(list)} - this method returns True if every element in list is True (!=0), or if the list is empty.
+\begin{itemize}
+    \item True
+    \item False
+\end{itemize}
+
+\textbf{Answer:} True
+
+\subsection*{Question 8}
+What will be the output of the following Python code?
+\begin{verbatim}
+lst = [3, 4, 6, 1, 2]
+lst[1:2] = [7, 8]
+print(lst)
+\end{verbatim}
+
+\begin{itemize}
+    \item [3, 7, 6, 1, 2]
+    \item [3, [7, 8], 6, 1, 2]
+    \item Syntax Error
+    \item [3, 7, 8, 6, 1, 2]
+\end{itemize}
+
+\textbf{Answer:} \([3, 7, 8, 6, 1, 2]\)
+
+\subsection*{Question 9}
+If I applied the title method to the string - 'This Is a Title', the resulting string returned would be
+\begin{itemize}
+    \item This Is A Title
+    \item THIS IS A TITLE
+    \item this is a title
+    \item This is a title
+\end{itemize}
+
+\textbf{Answer:} This Is A Title
+
+\subsection*{Question 10}
+What will be the output of the following Python code?
+\begin{verbatim}
+numbers = [1, 2, 3, 4]
+numbers.append([5, 6, 7, 8])
+print(len(numbers))
+\end{verbatim}
+
+\begin{itemize}
+    \item 5
+    \item 6
+    \item 7
+    \item 8
+\end{itemize}
+
+\textbf{Answer:} 5
+
+\end{document}

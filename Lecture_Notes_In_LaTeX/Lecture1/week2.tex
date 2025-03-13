@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Types - MAD 102 Week 2 Notes}
+\author{Hia Al Saleh}
+\date{September 11th, 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Getting Input}
+\begin{itemize}
+    \item Information required for the program to operate comes as input.
+    \item Use \texttt{input()} function to capture input as text (string).
+    \item Example:
+\begin{lstlisting}[language=python]
+name = input("Enter your name")
+print("Hello", name)
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Input Details}
+\begin{itemize}
+    \item The input string can be assigned to a variable.
+    \item The argument in \texttt{input()} represents prompt text displayed to the user.
+    \item Input always returns a string, so numerical input needs conversion.
+\end{itemize}
+
+\subsection{Converting Input Types}
+\textbf{Explicit Conversion}:
+\begin{lstlisting}[language=python]
+age = int(input("Enter your Age"))
+print(type(age))  # Data Type: <class 'int'>
+\end{lstlisting}
+
+\textbf{Implicit Conversion}:
+\begin{lstlisting}[language=python]
+num1 = 1
+num2 = 3.4
+sum = num1 + num2  # Data Type: <class 'float'>
+\end{lstlisting}
+
+\section{Outputting Information}
+\begin{itemize}
+    \item Use the \texttt{print()} function to display results in the console.
+    \item Multiple arguments in \texttt{print()} are separated by commas and displayed with spaces in between.
+    \item \texttt{print()} ends with a newline character by default.
+    \item You can use \texttt{end=""} to avoid moving to the next line.
+\end{itemize}
+Example:
+\begin{lstlisting}[language=python]
+print("Hello", end='')
+print(" World!")  # Output: Hello World!
+\end{lstlisting}
+
+\section{Strings}
+\begin{itemize}
+    \item Strings are a sequence of characters enclosed in single or double quotes.
+    \item Strings are immutable (cannot be changed once created).
+    \item Access individual characters using indexing:
+\begin{lstlisting}[language=python]
+name = 'Luke'
+print(name[1])  # Output: u
+\end{lstlisting}
+    \item Positive indices start from 0 (left to right); negative indices start from -1 (right to left).
+    \item Strings can be concatenated using the \texttt{+} operator.
+\end{itemize}
+
+\subsection{Formatted Strings}
+\begin{itemize}
+    \item Use f-strings with \texttt{f" "} to format strings with placeholders \{\}.
+    \item Example:
+\begin{lstlisting}[language=python]
+name = "John"
+age = 25
+print(f"{name} is {age} years old.")
+    \end{lstlisting}
+    \item Formatting options can be applied inside placeholders using \texttt{':'}. For example, formatting numbers.
+\end{itemize}
+
+\section{Lists}
+\begin{itemize}
+    \item A list is a mutable, ordered collection of elements, defined with square brackets \texttt{[ ]}.
+    \item Access list elements using their index:
+\begin{lstlisting}[language=python]
+my_list = [1, 2, 3]
+print(my_list[0])  # Output: 1
+\end{lstlisting}
+    \item Lists can be modified, and new items can be added using the \texttt{append()} method.
+    \item Items can be removed using \texttt{pop()} or \texttt{remove()} methods.
+\end{itemize}
+
+\section{Tuples}
+\begin{itemize}
+    \item Tuples are immutable, ordered collections of elements, defined using parentheses \texttt{( )}.
+    \item Example:
+    \begin{lstlisting}[language=python]
+coordinates = (83.232, 32.321)
+    \end{lstlisting}
+    \item Named tuples allow attributes to be accessed using dot notation.
+\end{itemize}
+
+\section{Sets}
+\begin{itemize}
+    \item Sets are unordered collections of unique elements, defined using curly braces \texttt{\{ \}}.
+    \item No repeated elements are allowed.
+    \item Add elements using the \texttt{add()} method and remove elements using \texttt{remove()} or \texttt{pop()}.
+\end{itemize}
+
+\section{Dictionaries}
+\begin{itemize}
+    \item Dictionaries store key-value pairs, defined using curly braces \texttt{\{ \}} with a colon separating keys and values.
+    \item Access items using keys rather than indices.
+    \item Modify dictionaries by assigning new values to keys, and remove entries using the \texttt{del} keyword.
+\end{itemize}
+\begin{lstlisting}[language=python]
+    nhteams = {
+    1926: 'Detroit Red Wings',
+    1979: 'Edmonton Oilers',
+    1927: 'Toronto Maple Leafs'
+    }
+    nhteams[1926]= 'Chicago Blackhawks'
+
+    print(nhteams)
+\end{lstlisting}
+
+\end{document}

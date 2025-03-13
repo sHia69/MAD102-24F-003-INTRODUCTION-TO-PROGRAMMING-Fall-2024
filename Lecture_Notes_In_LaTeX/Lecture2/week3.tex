@@ -1,0 +1,286 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Controlling Program Flow - MAD 102 Week 3 Notes}
+\author{Hia Al Saleh}
+\date{September 18th, 2024}
+\begin{document}
+\maketitle
+\tableofcontents 
+\newpage
+
+\section{The Selection Structure}
+\begin{itemize}
+    \item A selection structure evaluates a condition, which is an expression that’s true or false.
+    \item This allows you to specify different courses of action based on the evaluation:
+    \begin{itemize}
+        \item Do one thing if true.
+        \item Do something else if not (false).
+    \end{itemize}
+    \item A branch is a sequence of statements that are only executed if a specific condition is met. This branch may never get executed in your program.
+\end{itemize}
+
+\section{Boolean Expression}
+\begin{itemize}
+    \item A selection structure depends on a condition.
+    \item This is an expression describing the relationship between two values that’s evaluated when it appears in program code.
+    \item A Boolean expression evaluates to true or false.
+    \item Named after \href{https://en.wikipedia.org/wiki/George_Boole}{George Boole}, who developed an extensive system of logic based on true and false conditions and their consequences.
+\end{itemize}
+
+\section{Booleans and Equality Operator}
+\begin{itemize}
+    \item Booleans are used to compare values.
+    \begin{itemize}
+        \item Are you old enough to drive?
+        \item Is the correct username entered?
+        \item Did I successfully retrieve the information from the server?
+    \end{itemize}
+    \item To see if an answer is equivalent to an expected value, use the equality operator \texttt{==}.
+    \item This returns a value of either true or false.
+    \item \textbf{NOTE:} Many students confuse the mathematical operator \texttt{=} with the equality operator \texttt{==}. Remember that \texttt{=} is the assignment operator in coding.
+\end{itemize}
+
+\section{Relational Operators}
+Common relational operators include:
+    \begin{itemize}
+        \item \texttt{\hl{==}}: Checks if two values are equal.
+        \item \texttt{\hl{<}}: Less than.
+        \item \texttt{\hl{>}}: Greater than.
+        \item \texttt{\hl{<=}}: Less than or equal to.
+        \item \texttt{\hl{>=}}: Greater than or equal to.
+        \item \texttt{\hl{!=}}: Not equal to.
+    \end{itemize}
+The \texttt{==} operator is a common relational operator. Here are some additional relational operators used in programming:
+
+\begin{itemize}
+        \item \texttt{age < 60}: Checks if the age is less than 60.
+        \item \texttt{hours > 40}: Checks if the hours are greater than 40.
+        \item \texttt{region == "Ontario"}: Checks if the region is equal to Ontario.
+        \item \texttt{status != "denied"}: Checks if the status is NOT denied.
+        \item \texttt{quantity <= 10}: Checks if the quantity is 10 and under (includes 10).
+        \item \texttt{grade >= 90}: Checks if the grade is greater than or equal to 90.
+    \end{itemize}
+\textbf{NOTE:} The relational operator for checking if two values are equal is \texttt{==}. A single equals sign \texttt{=} is the assignment operator.
+\section{Controlling Program Flow}
+\begin{itemize}
+    \item The most common way of controlling a program's flow is to determine what a program will do based on decisions.
+    \item These decisions can be simple or complex.
+    \item The decision process is facilitated using an \texttt{if} statement.
+\end{itemize}
+
+\subsection{If Statement}
+\begin{itemize}
+    \item The simplest selection structure is one in which an action is taken if a condition evaluates to true, but no action is taken if the condition evaluates to false.
+    \item This is a single-outcome section.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+# Python syntax
+if condition:
+    # action if condition is true
+else:
+    # action if condition is false
+\end{lstlisting}
+\textbf{NOTE:} An indentation is a tab – it is not a series of spaces.
+
+\section{Flow Charting}
+\begin{itemize}
+    \item The diamond shape is the standard symbol for flow charting. It represents decision points with single outcomes.
+    \item True Branch and False Branch lead to further actions based on evaluation.
+\end{itemize}
+\includegraphics[width=\linewidth]{Lecture_Notes_In_LaTex/imgs/flowchart.png}
+\section{Dual Outcome}
+\begin{itemize}
+    \item A dual outcome is a selection statement where you perform one set of instructions if a condition evaluates to true, otherwise perform a second set of instructions.
+    \item Dual outcomes work under the principles of Boolean logic – something is either true or false – if true, do this; otherwise, do the other step.
+    \item Dual outcomes use the keywords \texttt{if} and \texttt{else}.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+if condition:
+    # action if condition is true
+else:
+    # action if condition is false
+\end{lstlisting}
+
+\section{Multiple Outcomes}
+\begin{itemize}
+    \item When there are more than a single or dual outcomes, use \texttt{if}, \texttt{elif}, and \texttt{else} to represent multiple conditions.
+    \item The first condition is marked with \texttt{if}.
+    \item The end condition is marked with \texttt{else}.
+    \item All other conditions are marked with \texttt{elif}.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+grade = 55
+
+if grade >= 80:
+    print("You have received an A")
+elif grade >= 70:
+    print("You have received a B")
+elif grade >= 60:
+    print("You have received a C")
+elif grade >= 50:
+    print("You have received a D")
+else:
+    print("You have received an F")
+\end{lstlisting}
+
+\section{Detecting Ranges}
+\begin{itemize}
+    \item The order of your conditional statements allows you to check if a value is within a specified range.
+    \item Each expression indicates the upper range.
+    \item If you fall to the next condition and that evaluates to true, you must be within the specified range.
+\end{itemize}
+
+\section{Describing Complex Conditions}
+\begin{itemize}
+    \item Often, two or more conditions are involved in a decision. Describe the relationship between the conditions.
+    \item Example:
+    \begin{itemize}
+        \item A student makes the dean's list for taking 12 credit hours AND having a grade point average of at least 3.5.
+        \item A movie theater offers a discount to anyone who is under 6 years old OR over 65 years old.
+        \item An employee gets a bonus vacation day for meeting a sales quota AND not being absent for a three-month period.
+    \end{itemize}
+\end{itemize}
+
+\section{Logical Operators: \texttt{and}, \texttt{or}, and \texttt{not}}
+\begin{itemize}
+    \item Logical operators are used when evaluating two or more conditions.
+    \item A complex condition occurs when two or more conditions must be evaluated for an action to take place.
+    \item Example:
+    \begin{itemize}
+        \item An employee is eligible for a discount on store items after working two months AND having a perfect attendance record.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Conditions are joined with:
+    \begin{itemize}
+        \item \texttt{and} - both conditions must be true.
+        \item \texttt{or} - at least one condition must be true.
+        \item \texttt{not} - negates the condition; true if the value is false.
+    \end{itemize}
+\end{itemize}
+
+\section{Truth Tables}
+\begin{itemize}
+    \item Truth tables help sort out complex logical situations and make coding easier.
+    \item A truth table expresses the results of combinations of conditions.
+\end{itemize}
+
+\section{Decision Tables}
+\begin{itemize}
+    \item Decision tables are used for problems with multiple outcomes.
+    \item They state all relevant conditions, true and false combinations of these conditions, and outcomes associated with each combination.
+    \item The number of combinations is \(2^n\), where \(n\) is the number of conditions.
+\end{itemize}
+
+\begin{itemize}
+    \item Example:
+    \begin{itemize}
+        \item A bank loan decision based on income, credit score, and employment duration.
+    \end{itemize}
+\end{itemize}
+
+\section{Binary Trees}
+\begin{itemize}
+    \item Binary trees trace all combinations by splitting conditions into true and false paths.
+    \item Paths lead to the next condition. Irrelevant conditions don’t split into true and false paths.
+\end{itemize}
+
+\section{Resulting Code}
+\begin{itemize}
+    \item The decision table can be translated into code.
+\end{itemize}
+\begin{lstlisting}[language=python]
+# Resilting Code
+student = ["Mal", "Jayne", "Washburn", "Zoe"]
+name = input("Please enter a name:")
+
+if name in student:
+    print("Welcone - you are registered")
+else:
+    print("Welcome - you are not on our class list")        
+\end{lstlisting}
+
+\section{Nested Conditional Statements}
+\begin{itemize}
+    \item A branch’s statement can hold additional \texttt{if-else} statements, known as nested statements.
+    \item Indentation is important.
+\end{itemize}
+
+\section{Membership Operators}
+\begin{itemize}
+    \item Membership operators return a Boolean value (true or false).
+    \item They determine if a specified value is found in a container type (using \texttt{in}) or not (using \texttt{not in}).
+\end{itemize}
+\begin{lstlisting}[language=python]
+# Membership Operator
+firstName = "Edgar"
+lastName = "Smith"
+
+anotherName = firstName
+
+if firstName is anotherName:
+    print("Same object")
+else:
+    print("Different object")     
+\end{lstlisting}
+\section{Identity Operator}
+\begin{itemize}
+    \item The identity operator (\texttt{is}) checks if two operands are bound to a single object.
+    \item \texttt{is not} is the inverse.
+    \item They do not compare values but check if two variables share the same memory address.
+\end{itemize}
+
+\section{Ternary Operation}
+\begin{itemize}
+    \item A ternary operation is a conditional expression with three operands.
+    \item Also known as a conditional expression.
+    \item Difficult to read; should only be used for simple assignments.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+# Ternary Operation
+grade = 50
+result = "You have passed" if grade >= 50 else "You have failed"
+print(result)
+\end{lstlisting}
+
+\end{document}

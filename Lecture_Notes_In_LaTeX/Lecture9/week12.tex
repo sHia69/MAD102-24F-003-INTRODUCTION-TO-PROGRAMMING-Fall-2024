@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Exceptions - MAD 102 Week 12 Notes}
+\author{Hia Al Saleh}
+\date{November 20th, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Handling Errors}
+\begin{itemize}
+    \item When the user enters incorrect information – how do you handle it?
+    \item How do you detect that the information is incorrect and what course of action do you take to ensure that your program continues to run?
+    \item Create error-checking code to detect and handle errors while the program is executing.
+\end{itemize}
+
+\section{Exception Handling}
+\begin{itemize}
+    \item Special constructs known as \textbf{exception-handling} handle exceptional conditions.
+    \item Example: User inputs \texttt{'dog'} instead of a number.
+\end{itemize}
+
+\section{Try / Except}
+\begin{itemize}
+    \item If there's a possibility that your code may produce an exception, place the code in a \texttt{try} block.
+    \item Use the keyword \texttt{try} to mark the block.
+    \item The solution for handling the exception is placed in an \texttt{except} block.
+    \item Use the keyword \texttt{except} to mark the block.
+\end{itemize}
+
+\section{Try / Except Example}
+\begin{itemize}
+    \item If no errors occur in the \texttt{try} block (no exceptions), the code progresses as normal.
+    \item If an error occurs (an exception is thrown), the code in the \texttt{except} block is executed.
+    \item Any code in the \texttt{try} block is skipped if an error occurs.
+\end{itemize}
+
+\section{Exception Errors}
+\begin{itemize}
+    \item \textbf{ValueError} – Raised when an operation or function receives an argument with the right type but inappropriate value.
+    \item \textbf{KeyError} – Raised when a mapping (dictionary) key is not found in the set of existing keys.
+    \item \textbf{IndexError} – Raised when a sequence subscript is out of range.
+    \item \textbf{NameError} – Raised when an identifier is not found.
+    \item \textbf{ZeroDivisionError} – Raised when the second argument of a division or modulo operation is zero.
+\end{itemize}
+
+More built-in exception errors can be found in the Python documentation: \url{https://docs.python.org/3/library/exceptions.html}.
+
+\section{Multiple Exception Handlers}
+\begin{itemize}
+    \item Multiple exceptions could be generated depending on your program.
+    \item Use multiple \texttt{except} blocks to handle various types of exceptions.
+    \item Each \texttt{except} block should specify the type of exception it handles.
+\end{itemize}
+
+Example:
+\begin{lstlisting}[language=Python]
+except (ValueError, TypeError):
+    # Code to execute
+\end{lstlisting}
+
+\section{Raising Exceptions}
+\begin{itemize}
+    \item Exception handling constructs can be used to raise (throw) errors.
+    \item The keyword \texttt{raise} is used, followed by the type of error to raise.
+    \item A string argument is provided to the exception error that details the issue.
+\end{itemize}
+
+\section{Exceptions with Functions}
+\begin{itemize}
+    \item Exceptions can be part of functions, allowing for better program clarity.
+\end{itemize}
+
+\section{\texttt{finally} Clause}
+\begin{itemize}
+    \item The \texttt{finally} clause of a \texttt{try} statement specifies clean-up actions.
+    \item These actions are always executed, regardless of whether an exception is raised.
+\end{itemize}
+
+\section{Creating Custom Error Types}
+\begin{itemize}
+    \item Custom exception types can be created using classes.
+    \item Define a class with an initializer and use it as a normal exception.
+\end{itemize}
+
+\end{document}

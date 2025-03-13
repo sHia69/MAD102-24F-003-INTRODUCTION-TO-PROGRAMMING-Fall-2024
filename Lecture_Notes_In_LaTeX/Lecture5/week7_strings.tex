@@ -1,0 +1,204 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+\title{Python Strings - MAD 102 Week 7 Notes}
+\author{Hia Al Saleh}
+\date{October 17th, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Introduction to Strings in Python}
+Strings are one of the most commonly used data types in Python. They are sequences of characters enclosed in either single or double quotes.
+
+\begin{lstlisting}[language=Python]
+# Initialize a string
+string = "Hello World!"
+print(string[0:4])  # Outputs 'Hell'
+\end{lstlisting}
+
+We can use indexing and slicing to extract parts of a string. Python supports both positive and negative indexing.
+
+\subsection{Indexing and Slicing}
+Indexing starts from 0, and negative indexing begins from -1 (last character).
+\begin{lstlisting}[language=Python]
+# Positive indexing
+string[1]  # Outputs 'e'
+
+# Negative indexing
+string[-1]  # Outputs '!'
+\end{lstlisting}
+
+\subsection{String Length}
+The length of a string can be determined using the \texttt{len()} function:
+\begin{lstlisting}[language=Python]
+len(string)  # Outputs 12
+\end{lstlisting}
+
+\section{Slicing Strings}
+Slicing allows us to extract a range of characters from a string:
+\begin{lstlisting}[language=Python]
+word = 'batman'
+print(word[3:5])  # Outputs 'ma'
+print(word[-3:])  # Outputs 'man'
+\end{lstlisting}
+
+The start or end of the slice can be omitted:
+\begin{lstlisting}[language=Python]
+print(word[3:])   # Outputs 'man'
+print(word[:3])   # Outputs 'bat'
+\end{lstlisting}
+
+\section{String Formatting}
+Python provides several methods for formatting strings:
+\subsection{Field Width and Alignment}
+We can use formatted string literals (f-strings) to specify field width and alignment:
+\begin{lstlisting}[language=Python]
+print(f'{"Student Name":20}{"Marks":^10}')
+# Output:
+# Student Name          Marks   
+# ------------------------------
+# Malcola Reynolds        60    
+\end{lstlisting}
+
+\subsection{Fill Characters}
+Padding characters can be specified in the format:
+\begin{lstlisting}[language=Python]
+print(f'{10:0>6}')  # Outputs '000010'
+\end{lstlisting}
+
+\section{String Methods}
+Python strings support a variety of useful methods, including:
+\subsection{replace()}
+The \texttt{replace()} method replaces parts of a string with another substring:
+\begin{lstlisting}[language=Python]
+title = 'The new adventures of Indiana Jones'
+print(title.replace('new', 'continuing'))
+# Outputs: 'The continuing adventures of Indiana Jones'
+\end{lstlisting}
+
+\subsection{find()}
+The \texttt{find()} method returns the index of the first occurrence of a substring:
+\begin{lstlisting}[language=Python]
+phrase = 'This is very, very, very long'
+print(phrase.find('very'))  # Outputs: 8
+\end{lstlisting}
+
+\section{Comparing Strings}
+Python supports comparison of strings using relational and equality operators:
+\begin{lstlisting}[language=Python]
+print('a' > 'A')  # Outputs: True
+print('bat' > 'ball')  # Outputs: True
+\end{lstlisting}
+
+\subsection{Membership and Identity Operators}
+We can check for substring membership or identity:
+\begin{lstlisting}[language=Python]
+print('bat' in 'batman')  # Outputs: True
+print(string1 is string2)  # Checks if both variables refer to the same object
+\end{lstlisting}
+
+\section{Looping Through Strings}
+We can iterate through strings using a \texttt{for} loop:
+\begin{lstlisting}[language=Python]
+word = 'batman'
+for char in word:
+    print(char)
+# Outputs:
+# b
+# a
+# t
+# m
+# a
+# n
+\end{lstlisting}
+
+\section{String Validation Methods}
+Python provides several methods for validating string content:
+\begin{lstlisting}[language=Python]
+print('abc123'.isalnum())  # Returns True if all characters are alphanumeric
+print('123'.isdigit())  # Returns True if all characters are digits
+print('abc'.islower())  # Returns True if all characters are lowercase
+print('   '.isspace())  # Returns True if all characters are whitespace
+\end{lstlisting}
+
+\section{String Manipulation Methods}
+Common string manipulation methods include:
+\begin{itemize}
+    \item \texttt{capitalize()} – Capitalizes the first character.
+    \item \texttt{lower()} – Converts all characters to lowercase.
+    \item \texttt{upper()} – Converts all characters to uppercase.
+    \item \texttt{strip()} – Removes leading and trailing spaces.
+    \item \texttt{title()} – Capitalizes the first letter of each word.
+\end{itemize}
+\begin{lstlisting}[language=Python]
+phrase = " frozen is my FAVOURITE movie!!!   "
+print(phrase.capitalize())  # Outputs: 'Frozen is my favourite movie!!!'
+print(phrase.strip())  # Outputs: 'frozen is my FAVOURITE movie!!!'
+\end{lstlisting}
+
+\section{String Splitting and Joining}
+The \texttt{split()} method splits a string into a list of substrings based on a separator:
+\begin{lstlisting}[language=Python]
+phrase = "I love to watch Frozen, Despicable Me, Free Birds"
+print(phrase.split(','))  # Outputs: ['I love to watch Frozen', ' Despicable Me', ' Free Birds ']
+\end{lstlisting}
+
+The \texttt{join()} method joins a list of strings with a specified separator:
+\begin{lstlisting}[language=Python]
+list = ['https', 'www', 'google', 'com']
+print('/'.join(list))  # Outputs: 'https/www/google/com'
+\end{lstlisting}
+
+\section{Password Validation Challenge}
+A sample challenge involves validating a password based on certain criteria:
+\begin{lstlisting}[language=Python]
+email = input("Enter Email ID: ").lower().strip()
+password = input("Enter Password: ")
+
+if (len(password) >= 8 and 
+    any(char.islower() for char in password) and
+    any(char.isupper() for char in password) and
+    any(char.isdigit() for char in password)):
+    print("Password is valid")
+else:
+    print("Password is invalid")
+\end{lstlisting}
+
+This program ensures the password contains at least 8 characters, one lowercase, one uppercase, and one digit.
+
+\end{document}

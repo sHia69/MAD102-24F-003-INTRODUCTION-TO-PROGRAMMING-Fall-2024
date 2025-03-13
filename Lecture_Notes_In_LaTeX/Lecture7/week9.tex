@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Object-Oriented Programming - MAD 102 Week 9 Notes}
+\author{Hia Al Saleh}
+\date{October 30th, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to Programming Paradigms}
+\subsection{Procedural Programming}
+Procedural programming involves writing programs as a series of instructions to be executed sequentially. Common elements in procedural programming include:
+\begin{itemize}
+    \item \textbf{Sequence}: Organizing code to be executed in a specific order.
+    \item \textbf{Conditionals and Loops}: Adding control flow with if-else statements and loops.
+    \item \textbf{Functions}: Grouping code into reusable blocks.
+\end{itemize}
+
+This approach is effective for small programs but presents challenges with complexity:
+\begin{itemize}
+    \item Code becomes harder to manage as the program size increases.
+    \item Variables are often global, leading to unexpected interactions.
+    \item Does not directly associate data with the functions operating on it.
+\end{itemize}
+
+\subsection{Object-Oriented Programming (OOP)}
+OOP overcomes these limitations by organizing code around \textbf{objects}, which represent real-world entities or concepts. Each object combines data and methods, making the code more modular, easier to understand, and maintainable. Key benefits include:
+\begin{itemize}
+    \item \textbf{Data Integrity}: Attributes and behaviors are encapsulated within objects, preventing unauthorized access.
+    \item \textbf{Reusability}: Allows code reuse through inheritance and polymorphism.
+    \item \textbf{Extensibility}: New functionalities can be easily added by extending existing classes.
+\end{itemize}
+
+\section{Core Concepts in OOP}
+\subsection{Objects and Classes}
+In OOP, we use \textbf{classes} as blueprints to create \textbf{objects}. For instance, a \texttt{Car} class might define attributes like \texttt{color}, \texttt{make}, and \texttt{model}, and behaviors like \texttt{drive()} or \texttt{brake()}.
+\begin{itemize}
+    \item \textbf{Objects} are instances of classes, containing data and methods.
+    \item \textbf{Classes} define the structure and behavior of objects.
+\end{itemize}
+
+\subsection{Attributes and Methods}
+\textbf{Attributes} store the state of an object (e.g., a dog’s \texttt{breed}), while \textbf{methods} define its behavior (e.g., a dog’s \texttt{bark()} method). Together, they form a self-contained entity.
+\begin{lstlisting}[language=Python]
+class Dog:
+    def __init__(self, breed):
+        self.breed = breed
+    
+    def bark(self):
+        print("Woof!")
+\end{lstlisting}
+
+\subsection{Encapsulation}
+Encapsulation refers to restricting access to an object’s internal data, allowing control over modifications. This improves security and simplifies code maintenance:
+\begin{itemize}
+    \item \textbf{Public Attributes and Methods}: Accessible from outside the class.
+    \item \textbf{Private Attributes and Methods}: Restricted to the class itself.
+\end{itemize}
+For example, \texttt{\_balance} might be a private attribute in a \texttt{BankAccount} class, accessible only through methods like \texttt{deposit()} or \texttt{withdraw()}.
+
+\subsection{Abstraction}
+Abstraction hides complex details, exposing only relevant information. For example:
+\begin{itemize}
+    \item Logging into an account shows a login form but hides the details of password encryption.
+\end{itemize}
+By focusing on essential information, abstraction reduces complexity for users.
+
+\subsection{Inheritance}
+Inheritance allows classes to share attributes and methods, simplifying code reuse:
+\begin{itemize}
+    \item \textbf{Base (Parent) Class}: Defines general characteristics.
+    \item \textbf{Derived (Child) Class}: Inherits from the base and adds specific features.
+\end{itemize}
+
+Example:
+\begin{lstlisting}[language=Python]
+class Animal:
+    def move(self):
+        print("Moving...")
+        
+class Dog(Animal):
+    def bark(self):
+        print("Woof!")
+\end{lstlisting}
+Here, \texttt{Dog} inherits \texttt{move()} from \texttt{Animal} while adding \texttt{bark()}.
+
+\subsection{Polymorphism}
+Polymorphism enables classes to redefine inherited methods, allowing different behaviors based on the object’s type. For instance:
+\begin{lstlisting}[language=Python]
+class Animal:
+    def make_noise(self):
+        print("Some noise")
+        
+class Cat(Animal):
+    def make_noise(self):
+        print("Meow")
+        
+class Dog(Animal):
+    def make_noise(self):
+        print("Woof")
+\end{lstlisting}
+
+Calling \texttt{make\_noise()} on a \texttt{Dog} or \texttt{Cat} object will produce different sounds, demonstrating polymorphism.
+
+\section{Creating and Using Classes}
+\subsection{Defining Classes}
+A class defines the properties and methods for its objects. In Python, we define a class using the \texttt{class} keyword.
+\begin{lstlisting}[language=Python]
+class Student:
+    def __init__(self, name, student_id):
+        self.name = name
+        self.student_id = student_id
+\end{lstlisting}
+The \texttt{\_\_init\_\_()} method is a constructor that initializes a new instance of the class.
+
+\subsection{Creating Instances}
+Once a class is defined, we can create instances (objects) by calling the class as if it were a function.
+\begin{lstlisting}[language=Python]
+student1 = Student("Alice", 123)
+student2 = Student("Bob", 456)
+\end{lstlisting}
+
+\subsection{Instance and Class Attributes}
+\begin{itemize}
+    \item \textbf{Instance Attributes}: Specific to each object, like \texttt{student\_id}.
+    \item \textbf{Class Attributes}: Shared across all instances, defined within the class scope.
+\end{itemize}
+
+Example:
+\begin{lstlisting}[language=Python]
+class School:
+    school_name = "Greenwood High"  # Class attribute
+    
+    def __init__(self, name):
+        self.name = name  # Instance attribute
+\end{lstlisting}
+
+\section{Memory Management in OOP}
+Memory management in OOP involves handling memory allocation and deallocation. In Python:
+\begin{itemize}
+    \item \textbf{Automatic Memory Management}: Python manages memory allocation.
+    \item \textbf{Garbage Collection}: When an object’s reference count reaches zero, it’s deallocated.
+\end{itemize}
+
+\section{Summary of Key Concepts}
+OOP offers a structured way to create complex programs by grouping related data and functionality. The main pillars—\textbf{Encapsulation}, \textbf{Abstraction}, \textbf{Inheritance}, and \textbf{Polymorphism}—provide a foundation for building modular, reusable, and scalable code.
+
+\end{document}

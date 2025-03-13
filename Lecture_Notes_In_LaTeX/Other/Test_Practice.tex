@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Python Practice Questions - MAD 102 Notes}
+\author{Aishwarya Rajasekaran}
+\date{October 1st, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Longest Country Name}
+\begin{lstlisting}[language=Python]
+countries = ["Australia", "Germany", "United States of America"]
+longest_country = ""
+for country in countries:
+    if len(country) > len(longest_country):
+        longest_country = country
+print("The longest country name is:", longest_country)
+\end{lstlisting}
+
+\section*{2. FizzBuzz from 1 to 15}
+\begin{lstlisting}[language=Python]
+for i in range(1, 16):
+    if i % 3 == 0 and i % 5 == 0:
+        print("FizzBuzz")
+    elif i % 3 == 0:
+        print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
+    else:
+        print(i)
+\end{lstlisting}
+
+\section*{3. Reverse List with Index}
+\begin{lstlisting}[language=Python]
+n = int(input("Enter the number of elements: "))
+numbers = []
+for i in range(n):
+    numbers.append(int(input("Enter number: ")))
+
+for i in range(n-1, -1, -1):
+    print(f"Index: {i}, Number: {numbers[i]}")
+\end{lstlisting}
+
+\section*{5. Count Vowels in String}
+\begin{lstlisting}[language=Python]
+vowels = "aeiouAEIOU"
+s = input("Enter a string: ")
+count = 0
+for char in s:
+    if char in vowels:
+        count += 1
+print("Number of vowels:", count)
+\end{lstlisting}
+
+\section*{6. Display Each Character with Position}
+\begin{lstlisting}[language=Python]
+s = input("Enter a string: ")
+for index in range(len(s)):
+    print(f"Position {index}: {s[index]}")
+\end{lstlisting}
+
+\section*{7. Right-Angle Triangle with Asterisks}
+\begin{lstlisting}[language=Python]
+n = int(input("Enter number of rows: "))
+for i in range(1, n+1):
+    print("*" * i)
+\end{lstlisting}
+
+\section*{8. Pyramid Pattern with Incremental Numbers}
+\begin{lstlisting}[language=Python]
+n = int(input("Enter the number of rows: "))
+num = 1
+for i in range(1, n+1):
+    for j in range(1, i+1):
+        print(num, end=" ")
+        num += 1
+    print()
+\end{lstlisting}
+
+\section*{9. Harmonic Series and Sum}
+\begin{lstlisting}[language=Python]
+n = int(input("Enter the number of terms: "))
+harmonic_sum = 0
+for i in range(1, n+1):
+    harmonic_sum += 1/i
+    print(f"1/{i}", end="")
+    if i != n:
+        print(" + ", end="")
+print(f" = {harmonic_sum}")
+\end{lstlisting}
+
+\section*{10. Armstrong Number}
+\begin{lstlisting}[language=Python]
+num = int(input("Enter a number: "))
+digits = [int(d) for d in str(num)]
+power = len(digits)
+armstrong_sum = sum(d**power for d in digits)
+
+if num == armstrong_sum:
+    print(f"{num} is an Armstrong number")
+else:
+    print(f"{num} is not an Armstrong number")
+\end{lstlisting}
+
+\section*{11. DeLorean Test Drive Game}
+\begin{lstlisting}[language=Python]
+speed = 0
+while True:
+    print(f"Current speed: {speed} mph")
+    action = input("Do you want to 'accelerate' or 'brake'? ").lower()
+    if action == 'accelerate':
+        speed += 10
+        if speed > 88:
+            print("You have traveled in time!")
+            break
+    elif action == 'brake':
+        print(f"You have stopped. Your top speed was {speed} mph.")
+        break
+\end{lstlisting}
+
+\section*{12. Generate User ID and Random Pin}
+\begin{lstlisting}[language=Python]
+import random
+
+first_name = input("First Name: ").lower()
+last_name = input("Last Name: ").lower()
+dob = input("Year of Birth (dd-mm-yyyy): ")
+
+username = first_name[:3] + last_name[:3] + dob[:2]
+password = random.randint(1000, 9999)
+
+print("Username:", username)
+print("Password:", password)
+\end{lstlisting}
+
+\end{document}

@@ -1,0 +1,293 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Inheritance - MAD 102 Week 11 Notes}
+\author{Hia Al Saleh}
+\date{November 13th, 2024}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to Inheritance}
+Inheritance is a fundamental concept in object-oriented programming that allows a class to inherit attributes and methods from another class, promoting code reuse and modularity. The class that inherits is known as the \textbf{derived class}, while the class it inherits from is the \textbf{base class}.
+
+\begin{itemize}
+    \item \textbf{Benefits of Inheritance}:
+        \begin{itemize}
+            \item Reduces redundancy by reusing code across multiple classes.
+            \item Allows for updates in the base class to automatically reflect in derived classes.
+            \item Simplifies the code structure by promoting a hierarchical organization.
+        \end{itemize}
+\end{itemize}
+
+\section{Class Hierarchy}
+Inheritance creates a \textbf{class hierarchy}, which models relationships in the form of parent and child classes.
+\begin{itemize}
+    \item \textbf{Parent (Base) Class}: Provides attributes and methods to be inherited by child classes.
+    \item \textbf{Child (Derived) Class}: Inherits attributes and methods from the parent class and can introduce its own methods.
+\end{itemize}
+
+For example:
+\begin{lstlisting}[language=Python]
+class Animal:
+    def speak(self):
+        print("Some generic animal sound")
+
+class Dog(Animal):  # Dog is a derived class of Animal
+    def speak(self):
+        print("Woof Woof")
+\end{lstlisting}
+
+In this example, \texttt{Dog} inherits from \texttt{Animal} and overrides the \texttt{speak} method.
+
+\section{Overriding Methods}
+A derived class can redefine or \textbf{override} a method inherited from the base class. This enables the derived class to provide a specialized behavior.
+
+\begin{lstlisting}[language=Python]
+class Animal:
+    def speak(self):
+        print("Some generic animal sound")
+
+class Cat(Animal):
+    def speak(self):
+        print("Meow")
+        
+animal = Animal()
+animal.speak()  # Outputs: Some generic animal sound
+
+cat = Cat()
+cat.speak()     # Outputs: Meow
+\end{lstlisting}
+
+Here, the \texttt{Cat} class overrides the \texttt{speak} method from \texttt{Animal} to provide a custom implementation.
+
+\section{Multiple Inheritance}
+In Python, a class can inherit from multiple base classes, which is called \textbf{multiple inheritance}. This is useful when a class needs features from more than one base class.
+
+\begin{lstlisting}[language=Python]
+class Walker:
+    def walk(self):
+        print("Walking on two legs")
+
+class Flyer:
+    def fly(self):
+        print("Flying with wings")
+
+class Bird(Walker, Flyer):  # Bird inherits from both Walker and Flyer
+    pass
+
+sparrow = Bird()
+sparrow.walk()  # Outputs: Walking on two legs
+sparrow.fly()   # Outputs: Flying with wings
+\end{lstlisting}
+
+The \texttt{Bird} class inherits methods from both \texttt{Walker} and \texttt{Flyer}.
+
+\section{Mixins}
+\textbf{Mixins} are classes used to extend the functionality of a class by providing additional methods. They are not intended to be standalone and are usually used with multiple inheritance.
+
+\begin{lstlisting}[language=Python]
+class StuntMixin:
+    def jump(self, distance):
+        print(f"Jumped {distance} meters!")
+
+class CarefulMixin:
+    def caution(self):
+        print("Proceeding with caution.")
+
+class DirtBike(StuntMixin, CarefulMixin):
+    pass
+
+dirt_bike = DirtBike()
+dirt_bike.jump(10)       # Outputs: Jumped 10 meters!
+dirt_bike.caution()       # Outputs: Proceeding with caution.
+\end{lstlisting}
+
+The \texttt{DirtBike} class uses \texttt{StuntMixin} and \texttt{CarefulMixin} to gain additional capabilities.
+
+
+\section{Extended Python Code Example}
+Below is an extended example of inheritance and mixins, combining all of the above concepts into a more complex class structure.
+
+\begin{lstlisting}[language=Python]
+# Base class
+class Vehicle:
+    def __init__(self, current_speed=0):
+        self.current_speed = current_speed
+    
+    def description(self):
+        print(f"Traveling at {self.current_speed} km/h")
+    
+    def make_noise(self):
+        print("Vroom Vroom")
+
+# Derived class inheriting from Vehicle
+class Bicycle(Vehicle):
+    def __init__(self, has_basket=False):
+        super().__init__(0)
+        self.has_basket = has_basket
+    
+    def description(self):
+        super().description()
+        print("But in the bike lane!")
+    
+    def make_noise(self):
+        print("Ring Ring")
+
+# Mixins for additional functionality
+class StuntMixin:
+    def jump(self, distance):
+        print(f"Jumped {distance} meters!")
+    
+    def skid(self, distance):
+        print(f"Skidded {distance} meters!")
+
+class CarefulMixin:
+    def avoid_obstacles(self):
+        print("Carefully avoiding obstacles.")
+
+# Multiple inheritance with Bicycle and mixins
+class DirtBike(Bicycle, StuntMixin, CarefulMixin):
+    def __init__(self, has_basket=False):
+        super().__init__(has_basket)
+    
+    def make_noise(self):
+        print("Braaaap")
+
+# Demonstration of class functionality
+car = Vehicle()
+car.description()
+car.make_noise()
+
+bike = Bicycle(has_basket=True)
+bike.description()
+bike.make_noise()
+
+dirt_bike = DirtBike()
+dirt_bike.jump(5)
+dirt_bike.skid(2)
+dirt_bike.avoid_obstacles()
+dirt_bike.current_speed = 20
+dirt_bike.description()
+dirt_bike.make_noise()
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{Vehicle}: The base class that provides a description and make\_noise methods.
+    \item \textbf{Bicycle}: A derived class that inherits from Vehicle, overriding the \texttt{make\_noise} method and extending \texttt{description}.
+    \item \textbf{StuntMixin} and \textbf{CarefulMixin}: Provide additional capabilities to the DirtBike class.
+    \item \textbf{DirtBike}: Combines all features of Vehicle, Bicycle, and the mixins to create a versatile class with multiple behaviors.
+\end{itemize}
+
+\newpage 
+
+\section{Class Exercise}
+\begin{itemize}
+    \item Create a program that will store a list of contacts
+    \item There are three types of contacts
+    \item A person with a name and phone number
+    \item A student with a name, a phone number, and the school they attend
+    \item An employee with a name, a phone number, and the place they work
+    \item A student is a person and an employee is also a person.
+    \end{itemize}
+The program will ask what type of contact to enter, and will continually ask until the user says they are done. Then it will display all the contacts entered.
+\begin{itemize}
+          \item If the contact is a person – it will display their name and phone number
+          \item If the contact is a student – it will display their name and phone number and then the
+          school they attend
+          \item If the contact is an employee – it will display their work place followed by their name and
+          phone number 
+\end{itemize}
+\subsection{Code}
+\begin{lstlisting}[language=python]
+    # Person class
+class Person:
+    # Constructor      
+    def __init__(self, name, phone):
+        self.name = name
+        self.phone = phone
+        
+    # String representation of the object    
+    def description(self):
+        return f"{self.name} {self.phone}"
+ 
+# Student class inherits from Person class          
+class Student(Person):
+    # Constructor
+    def __init__(self, name, phone, school):
+        super().__init__(name, phone)
+        self.school = school
+    # String representation of the object    
+    def description(self):
+        return f"{self.name} {self.phone} {self.school}"
+
+# Employee class inherits from Person class
+class Employee(Person):
+          # Constructor
+          def __init__(self, name, phone, work):
+                      super().__init__(name, phone)
+                      self.work = work
+          # String representation of the object            
+          def description(self):
+                    return f"{self.work} {self.name} {self.phone}"
+# Main program
+contacts = []
+
+while True:
+          contact_type = input("Enter type of contact (person, student, employee) or done: ").lower()
+          if contact_type == "done":
+                    break
+          name = input("Enter name: ")
+          phone = input("Enter phone number: ")
+          if contact_type == "person":
+                    contact = Person(name, phone)
+          elif contact_type == "student":
+                    school = input("Enter school: ")
+                    contact = Student(name, phone, school)
+          elif contact_type == "employee":
+                    work = input("Enter work place: ")
+                    contact = Employee(name, phone, work)
+          contacts.append(contact)
+          
+for contact in contacts:
+          print(contact)
+\end{lstlisting}
+\end{document}

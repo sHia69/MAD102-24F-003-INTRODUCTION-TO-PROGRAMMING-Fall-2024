@@ -1,0 +1,450 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Define custom colors
+\definecolor{bg}{rgb}{0.64, 0.64, 0.82}
+\definecolor{frame}{rgb}{0.59, 0.47, 0.71}
+\definecolor{keyword}{rgb}{0.63, 0.36, 0.94}
+\definecolor{comment}{rgb}{0.44, 0.5, 0.56}
+\definecolor{string}{rgb}{0.56, 0.27, 0.52}
+
+% Set custom listings options
+\lstset{
+    backgroundcolor=\color{bg},
+    frame=single,
+    rulecolor=\color{frame},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    commentstyle=\color{comment},
+    stringstyle=\color{string},
+    showstringspaces=false,
+    breaklines=true,
+    xleftmargin=2mm,
+    xrightmargin=2mm
+}
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 102 - Intro to Prog - Fall 2024}
+\fancyhead[R]{Instructor: Aishwarya Rajasekaran \thepage}
+
+\title{Functions - MAD 102 Week 6 Notes}
+\author{Hia Al Saleh}
+\date{October 9th, 2024}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to Functions}
+
+\subsection{Functions and Modules}
+Functions are sections of code that perform a specific task. They make a program more organized and clearer by breaking it down into smaller parts. 
+
+Key points:
+\begin{itemize}
+    \item Functions are self-contained blocks of code.
+    \item Functions help in clarity and reusability.
+    \item Modules are sections of code that are used to perform specific tasks.
+\end{itemize}
+
+\subsection{Top-down Design}
+Top-down design is a method of program design that outlines the tasks to be performed, with details being refined later. It makes the program structure clear by using a main module that can call other modules like \lstinline|displayCurrentBalance()|, \lstinline|withdraw()|, etc.
+
+\begin{lstlisting}[language=Python, caption={Example of Top-down Design}]
+def main():
+    displayCurrentBalance()
+    withdraw()
+    displayCurrentBalance()
+
+def displayCurrentBalance():
+    print("Current balance displayed.")
+
+def withdraw():
+    print("Amount withdrawn.")
+\end{lstlisting}
+
+\section{Modularization and Function Naming}
+
+\subsection{Modularizing a Program}
+Modularization helps in breaking down a large program into smaller, manageable sections (modules). Python recommends using lowercase function names with underscores between words, such as \lstinline|calculate_interest|.
+
+\begin{lstlisting}[language=Python, caption={Example of Correct Function Naming}]
+def calculate_interest():
+    pass  # Function body goes here
+\end{lstlisting}
+
+\subsection{Flowcharting Modules}
+When designing a program flow, modules are represented with a rectangle and the keyword \lstinline|Call| followed by the function name.
+
+\section{Function Basics}
+
+\subsection{Defining Functions}
+A function in Python is defined using the \lstinline|def| keyword followed by the function name and parentheses to wrap any arguments. Functions can be called using their name followed by parentheses.
+
+\begin{lstlisting}[language=Python, caption={Defining and Calling a Function}]
+def greet():
+    print("Hello!")
+
+greet()  # Calling the function
+\end{lstlisting}
+
+\subsection{Passing Arguments}
+Functions can accept arguments (values) that are passed when the function is called. This helps in reducing coupling and improving flexibility. You can pass multiple arguments by separating them with commas.
+
+\begin{lstlisting}[language=Python, caption={Passing Arguments to a Function}]
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Alice")  # Calling the function with an argument
+\end{lstlisting}
+
+\section{Scope of Variables in Functions}
+
+\subsection{Local and Global Variables}
+Variables declared inside a function are local to that function, meaning they cannot be accessed outside of it. Global variables are accessible by all functions, but using them increases the coupling between modules.
+
+\begin{lstlisting}[language=Python, caption={Using Local and Global Variables}]
+x = "global variable"
+
+def my_function():
+    x = "local variable"
+    print(x)  # Prints local variable
+
+my_function()
+print(x)  # Prints global variable
+\end{lstlisting}
+
+\subsection{Why Use Local Variables?}
+Local variables prevent name duplication and allow for efficient program execution by limiting the scope of variables. When needed, data can be passed to a function using arguments instead of relying on global variables.
+
+\section{Returning Values from Functions}
+
+Functions can return values using the \lstinline|return| keyword. Functions that do not return anything are known as void functions. If multiple values need to be returned, a tuple can be used.
+
+\begin{lstlisting}[language=Python, caption={Returning Values from a Function}]
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)  # Output: 8
+\end{lstlisting}
+
+\section{Advanced Function Topics}
+
+\subsection{Polymorphism}
+Functions can accept different types of arguments, a feature known as polymorphism. This allows the same function to work with strings, numbers, or other data types.
+
+\begin{lstlisting}[language=Python, caption={Polymorphic Function Example}]
+def add(x, y):
+    return x + y
+
+print(add(5, 3))  # Works with numbers
+print(add("hello", "world"))  # Works with strings
+\end{lstlisting}
+
+\subsection{Nested Functions}
+Functions can be defined inside other functions. These are known as nested functions, and they are hidden from code outside the enclosing function.
+
+\begin{lstlisting}[language=Python, caption={Nested Functions Example}]
+def outer_function():
+    def inner_function():
+        print("Inner function called.")
+    
+    inner_function()
+
+outer_function()
+\end{lstlisting}
+
+\subsection{Incremental Development and Function Stubs}
+Incremental development involves writing and testing small pieces of code gradually. Function stubs, using the \lstinline|pass| keyword or placeholders, can be useful for setting up a program before all functions are fully implemented.
+
+\begin{lstlisting}[language=Python, caption={Function Stub Example}]
+def my_function():
+    pass  # Placeholder for function implementation
+\end{lstlisting}
+
+\subsection{Functions as Objects}
+Functions in Python are objects, which means they have identity, type, and value. Functions can be assigned to variables and passed as arguments to other functions.
+
+\begin{lstlisting}[language=Python, caption={Assigning Functions to Variables}]
+def greet():
+    print("Hello!")
+
+g = greet  # Assign function to a variable
+g()  # Call the function using the variable
+\end{lstlisting}
+
+\subsection{Namespaces}
+A namespace maps names to objects. Python provides the \lstinline|locals()| and \lstinline|globals()| functions to access local and global namespaces, respectively.
+
+\section{Keyword and Default Arguments}
+
+\subsection{Keyword Arguments}
+Keyword arguments map arguments to parameters by their names rather than their order, making function calls clearer when dealing with multiple arguments.
+
+\begin{lstlisting}[language=Python, caption={Using Keyword Arguments}]
+def greet(name, message):
+    print(f"{message}, {name}!")
+
+greet(name="Alice", message="Good morning")
+\end{lstlisting}
+
+\subsection{Default Parameter Values}
+Functions can have default parameter values that can be overridden by providing new values when calling the function.
+
+\begin{lstlisting}[language=Python, caption={Using Default Parameter Values}]
+def greet(name, message="Hello"):
+    print(f"{message}, {name}!")
+
+greet("Alice")  # Uses default value for message
+greet("Bob", "Good evening")  # Overrides default value
+\end{lstlisting}
+
+\subsection{Arbitrary Arguments}
+Functions can accept arbitrary numbers of arguments using the \lstinline|*args| parameter, and keyword arguments can be captured using \lstinline|**kwargs|, which stores them in a dictionary.
+
+\begin{lstlisting}[language=Python, caption={Arbitrary Arguments Example}]
+def print_numbers(*args):
+    for num in args:
+        print(num)
+
+print_numbers(1, 2, 3, 4, 5)  # Prints multiple numbers
+\end{lstlisting}
+
+\section{Documenting Functions with Docstrings}
+
+A \lstinline|docstring| is a literal string placed in the first line of a function's body to document its purpose. This helps both the original programmer and others understand the function's use and behavior.
+
+\begin{lstlisting}[language=Python, caption={Docstring Example}]
+def greet():
+    """This function prints a greeting message."""
+    print("Hello!")
+\end{lstlisting}
+
+
+
+\section{Week 7: Functions in Class Demo}
+
+\subsection{Basic Function Example}
+This section covers basic function examples demonstrated in class.
+
+\begin{lstlisting}[language=Python, caption={Basic Addition Function}]
+def add(a, b):
+    print(a + b)
+
+# Calling the function
+add(3, 4)  # Outputs: 7
+add('x', 'y')  # Outputs: xy
+\end{lstlisting}
+
+\subsection{Scope of Variables}
+The following example demonstrates how global and local variables work in Python.
+
+\begin{lstlisting}[language=Python, caption={Variable Scope Example}]
+# Global variable
+c = 15
+
+# Function to perform addition
+def add(a, b):
+    c = 20
+    output = a + b + c
+    print(output)
+
+# Calling the function
+add(2, 3)  # Outputs: 25
+\end{lstlisting}
+
+\subsection{Nested Functions and Function Stubs}
+This example demonstrates nested functions and the use of function stubs in Python.
+
+\begin{lstlisting}[language=Python, caption={Billing System with Nested Functions}]
+def billing_system():
+    cart = []
+
+    def add_item(item_name, price):
+        cart.append((item_name, price))
+
+    def calculate_total():
+        total = sum(price for _, price in cart)
+        return total
+
+    def apply_discount(total, discount_percentage):
+        discount_amount = (discount_percentage / 100) * total
+        total = total - discount_amount
+        return total, discount_amount
+
+    def generate_bill():
+        print("Shopping Cart:")
+        for item_name, price in cart:
+            print(f"{item_name}: ${price:.2f}")
+        total = calculate_total()
+
+        discount_percentage = 10  # Example discount rate
+        if len(cart) > 2:
+            total_with_discount, discount_amount = apply_discount(total, discount_percentage)
+            print(f"Total before discount: ${total:.2f}")
+            print(f"Discount ({discount_percentage}%): ${discount_amount:.2f}")
+            print(f"Total after discount: ${total_with_discount:.2f}")
+        else:
+            print(f"Total: ${total:.2f} (No discount applied)")
+
+    while True:
+        print("Options:")
+        print("1. Add item to cart")
+        print("2. Generate bill")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            item_name = input("Enter item name: ")
+            price = float(input("Enter item price: "))
+            add_item(item_name, price)
+        elif choice == "2":
+            generate_bill()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    billing_system()
+\end{lstlisting}
+
+\newpage
+\subsection{Arguments: Keyword, Default, and Positional}
+This section covers different types of arguments.
+
+\begin{lstlisting}[language=Python, caption={Keyword and Default Arguments}]
+def add(a, b, c=1):  # c is the default argument
+    print(a + b + c)
+
+add(a=3, b=4, c=5)  # Outputs: 12
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Positional Arguments}]
+def sub(a, b):
+    print(a - b)
+
+sub(3, 4)  # Outputs: -1
+sub(4, 3)  # Outputs: 1
+\end{lstlisting}
+
+\subsection{Arbitrary Arguments}
+This section demonstrates how to work with variable-length arguments.
+
+\begin{lstlisting}[language=Python, caption={Arbitrary Positional Arguments (*args)}]
+def arbitrary_demo_args(*args):
+    list_created = []
+    for arg in args:
+        list_created.append(arg)
+    print(list_created)
+
+arbitrary_demo_args('1', '6', '8')  # Outputs: ['1', '6', '8']
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Arbitrary Keyword Arguments (**kwargs)}]
+def arbitrary_demo_kwargs(**a): # Variable length argument with Keyword
+    for key, val in kwargs.items():
+        print(f"Keyword: {key}, Value: {val}")
+
+arbitrary_demo_kwargs(firstName='Aishwarya', secondName='Raj')
+# Outputs:
+# Keyword: firstName, Value: Aishwarya
+# Keyword: secondName, Value: Raj
+\end{lstlisting}
+\newpage
+
+\section{Class Exercises}
+
+\subsection{Exercise 1: Comparing Scores and Finding Differences}
+
+\textbf{Requirements:}
+\begin{enumerate}
+    \item Ask for two player scores.
+    \item Find the highest and lowest score using a \textit{min\_max} function.
+    \item Calculate the difference using a \textit{score\_difference} function.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+# Function to return the minimum and maximum of two values
+def min_max(score1, score2):
+    if score1 > score2:
+        return score1, score2
+    elif score1 < score2:
+        return score2, score1
+    else:
+        return score1, score2  # Both are equal, returning either order doesn't matter
+
+# Function to return the absolute difference between the two scores
+def score_difference(score1, score2):
+    return abs(score1 - score2)
+
+# Main program for Exercise 1
+def main_exercise1():
+    # Get the scores from the user
+    score1 = int(input("Enter the first player's score: "))
+    score2 = int(input("Enter the second player's score: "))
+
+    # Get the highest and lowest scores
+    high, low = min_max(score1, score2)
+
+    # Calculate the score difference
+    difference = score_difference(high, low)
+
+    # Display the results
+    print(f"The highest score is: {high}")
+    print(f"The lowest score is: {low}")
+    print(f"The difference between the scores is: {difference}")
+
+# Run Exercise 1
+main_exercise1()
+\end{lstlisting}
+
+\subsection{Exercise 2: Number Guessing Game}
+
+\textbf{Requirements:}
+\begin{itemize}
+    \item A number between 1 and 10 is randomly generated.
+    \item The user has 3 chances to guess it.
+    \item Provide feedback if the guess is too high or too low.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+import random
+
+# Main program for Exercise 2
+def main_exercise2():
+    # Generate a random number between 1 and 10
+    number_to_guess = random.randint(1, 10)
+
+    # Allow the user 3 attempts to guess
+    attempts = 3
+    for i in range(attempts):
+        guess = int(input(f"Attempt {i+1}/{attempts} - Guess the number (1-10): "))
+
+        if guess == number_to_guess:
+            print("Congratulations! You've guessed the correct number.")
+            break
+        elif guess < number_to_guess:
+            print("Too low! Try again.")
+        else:
+            print("Too high! Try again.")
+
+    # If the user does not guess correctly after 3 attempts
+    else:
+        print(f"Sorry, you've used all attempts. The correct number was {number_to_guess}.")
+
+# Run Exercise 2
+main_exercise2()
+\end{lstlisting}
+
+\end{document}
